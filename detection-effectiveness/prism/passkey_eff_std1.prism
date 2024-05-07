@@ -1,0 +1,112 @@
+pomdp
+
+const int sites;
+const double unmarked_fraction;
+
+const double K;
+const double lambda;
+
+
+const double cdf00=0.00000000;
+const double cdf01=0.00000000;
+const double cdf02=0.00000000;
+const double cdf03=0.00000000;
+const double cdf04=0.00000029;
+const double cdf05=0.00003167;
+const double cdf06=0.00134990;
+const double cdf07=0.02275013;
+const double cdf08=0.15865525;
+const double cdf09=0.50000000;
+const double cdf10=0.84134475;
+const double cdf11=0.97724987;
+const double cdf12=0.99865010;
+const double cdf13=0.99996833;
+const double cdf14=0.99999971;
+const double cdf15=1.00000000;
+
+const int max_attack_time = 15;
+
+observables s, attack_time, attacked_sites endobservables
+
+
+formula marked = (unmarked_fraction = 1 ? 1 : max(floor(pow((1-unmarked_fraction), attack_time * lambda) * K), 0) + 1);
+formula real = 1.0/marked;
+formula real_prime = 1.0/(marked - 1);
+formula tdp = (unmarked_fraction * K)/(K + 1);
+
+
+module attacker
+
+	s : [-1..5] init -1;
+	attack_time : [-1..max_attack_time] init -1;
+	attacked_sites : [0..sites] init 0;
+
+	cred : [0..2] init 0; //1 for real; 2 for decoy
+
+	[attack00] s = -1 -> cdf00 : (s'=5) + (1-cdf00) : (attack_time'=0)  & (s'=0); //
+	[attack01] s = -1 -> cdf01 : (s'=5) + (1-cdf01) : (attack_time'=1)  & (s'=0); //
+	[attack02] s = -1 -> cdf02 : (s'=5) + (1-cdf02) : (attack_time'=2)  & (s'=0); //
+	[attack03] s = -1 -> cdf03 : (s'=5) + (1-cdf03) : (attack_time'=3)  & (s'=0); //
+	[attack04] s = -1 -> cdf04 : (s'=5) + (1-cdf04) : (attack_time'=4)  & (s'=0); //
+	[attack05] s = -1 -> cdf05 : (s'=5) + (1-cdf05) : (attack_time'=5)  & (s'=0); //
+	[attack06] s = -1 -> cdf06 : (s'=5) + (1-cdf06) : (attack_time'=6)  & (s'=0); //
+	[attack07] s = -1 -> cdf07 : (s'=5) + (1-cdf07) : (attack_time'=7)  & (s'=0); //
+	[attack08] s = -1 -> cdf08 : (s'=5) + (1-cdf08) : (attack_time'=8)  & (s'=0); //
+	[attack09] s = -1 -> cdf09 : (s'=5) + (1-cdf09) : (attack_time'=9)  & (s'=0); //
+	[attack10] s = -1 -> cdf10 : (s'=5) + (1-cdf10) : (attack_time'=10) & (s'=0); //
+	[attack11] s = -1 -> cdf11 : (s'=5) + (1-cdf11) : (attack_time'=11)  & (s'=0); //
+	[attack12] s = -1 -> cdf12 : (s'=5) + (1-cdf12) : (attack_time'=12)  & (s'=0); //
+	[attack13] s = -1 -> cdf13 : (s'=5) + (1-cdf13) : (attack_time'=13)  & (s'=0); //
+	[attack14] s = -1 -> cdf14 : (s'=5) + (1-cdf14) : (attack_time'=14)  & (s'=0); //
+	[attack15] s = -1 -> cdf15 : (s'=5) + (1-cdf15) : (attack_time'=15)  & (s'=0); //
+	
+	[] s = 0 & marked <= 1 & attacked_sites < sites & attack_time >= 0 -> (cred' = 1) & (s' = 3);
+	[guess] s = 0 & cred = 0 & attack_time >= 0 -> real : (cred'=1) & (s'=3) + 1-real : (cred'=2) & (s'=2); //
+	[swap] s = 0 & cred > 0 & marked >= 2 & attacked_sites < sites & attack_time >= 0 -> (s' = 1); //
+	[noguess] s = 0 & cred > 0 & marked >= 2 & attacked_sites < sites & attack_time >= 0 -> (s' = 2); //
+	[quit] s = 0 & cred > 0 & attacked_sites < sites & attack_time >= 0 -> (s' = 4);
+	[] s = 0 & attacked_sites >= sites -> (s' = 4);
+
+	[] s = 1 & cred = 1 -> (cred' = 2) & (s' = 2);
+	[] s = 1 & cred = 2 -> real_prime : (cred'=1) & (s'=2) + 1-real_prime : (cred'=2) & (s'=2);
+	[] s = 2 ->  1-tdp : (s'=3) + tdp : (s'=5);
+
+	[] s = 3 & attacked_sites >= sites -> (s'=4);	
+	[account_takeover] s = 3 & attacked_sites < sites -> (s'=0) & (attacked_sites' = attacked_sites + 1);
+
+	[rewards00] s = 4 & attack_time = 0  -> (s' = 5);
+	[rewards01] s = 4 & attack_time = 1  -> (s' = 5);
+	[rewards02] s = 4 & attack_time = 2  -> (s' = 5);
+	[rewards03] s = 4 & attack_time = 3  -> (s' = 5);
+	[rewards04] s = 4 & attack_time = 4  -> (s' = 5);
+	[rewards05] s = 4 & attack_time = 5  -> (s' = 5);
+	[rewards06] s = 4 & attack_time = 6  -> (s' = 5);
+	[rewards07] s = 4 & attack_time = 7  -> (s' = 5);
+	[rewards08] s = 4 & attack_time = 8  -> (s' = 5);
+	[rewards09] s = 4 & attack_time = 9  -> (s' = 5);
+	[rewards10] s = 4 & attack_time = 10 -> (s' = 5);
+	[rewards11] s = 4 & attack_time = 11 -> (s' = 5);
+	[rewards12] s = 4 & attack_time = 12 -> (s' = 5);
+	[rewards13] s = 4 & attack_time = 13 -> (s' = 5);
+	[rewards14] s = 4 & attack_time = 14 -> (s' = 5);
+	[] s = 5 -> (s' = 5);
+
+endmodule
+
+rewards
+	[rewards00] true : (9.00000000 - attack_time) * attacked_sites;
+	[rewards01] true : (9.00000000 - attack_time) * attacked_sites;
+	[rewards02] true : (9.00000000 - attack_time) * attacked_sites;
+	[rewards03] true : (9.00000000 - attack_time) * attacked_sites;
+	[rewards04] true : (9.00000148 - attack_time) * attacked_sites;
+	[rewards05] true : (9.00013383 - attack_time) * attacked_sites;
+	[rewards06] true : (9.00443783 - attack_time) * attacked_sites;
+	[rewards07] true : (9.05524786 - attack_time) * attacked_sites;
+	[rewards08] true : (9.28759996 - attack_time)  * attacked_sites;
+	[rewards09] true : (9.79788455 - attack_time)  * attacked_sites;
+	[rewards10] true : (10.52513525 - attack_time) * attacked_sites;
+	[rewards11] true : (11.37321537 - attack_time) * attacked_sites;
+	[rewards12] true : (12.28309655 - attack_time) * attacked_sites;
+	[rewards13] true : (13.22554693 - attack_time) * attacked_sites;
+	[rewards14] true : (14.18314709 - attack_time) * attacked_sites;
+endrewards

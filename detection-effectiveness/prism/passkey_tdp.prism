@@ -1,0 +1,38 @@
+pomdp
+
+const int snapshots;
+const int sites;
+const double unmarked_fraction;
+const double K;
+
+observables s, t, attacked_sites endobservables
+
+formula marked = max(floor(pow((1-unmarked_fraction), snapshots) * K), 0) + 1;
+formula real = 1.0/marked;
+formula real_prime = 1.0/(marked - 1);
+formula tdp = (unmarked_fraction * K)/(K + 1);
+
+module attacker
+
+	s : [0..3] init 0;
+	t : [0..1] init 0; //0 for no detection
+	attacked_sites : [0..sites] init 0;
+
+	cred : [0..2] init 0; //1 for real; 2 for decoy
+	
+	[] s = 0 & marked <= 1 & attacked_sites < sites -> (cred' = 1) & (s' = 2);
+	[guess] s = 0 & cred = 0 & marked >= 2 & attacked_sites < sites -> real : (cred'=1) & (s'=2) + 1-real : (cred'=2) & (s'=2);
+	[swap] s = 0 & cred > 0 & marked >= 2 & attacked_sites < sites -> (s' = 1);
+	[noguess] s = 0 & cred > 0 & marked >= 2 & attacked_sites < sites -> (s' = 2);
+	[] s = 0 & attacked_sites >= sites -> (s' = 3);
+
+	[] s = 1 & cred = 1 -> (cred' = 2) & (s' = 2);
+	[] s = 1 & cred = 2 -> real_prime : (cred'=1) & (s'=2) + 1-real_prime : (cred'=2) & (s'=2);
+
+	[] s = 2 & cred = 1 & attacked_sites < sites -> (s'=0) & (attacked_sites' = attacked_sites + 1);
+	[] s = 2 & cred = 2 & attacked_sites < sites ->  1-tdp : (s'=0) & (attacked_sites' = attacked_sites + 1) + tdp : (s'=3) & (t'=1);
+	
+	[] s = 2 & attacked_sites >= sites -> (s' = 3);
+	[] s = 3 -> (s' = 3);
+
+endmodule
