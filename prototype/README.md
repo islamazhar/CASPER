@@ -1,6 +1,4 @@
-# Going Passwordless with py_webauthn (Sample RP)
-
-A basic implementation of a WebAuthn RP using the [py_webauthn](https://github.com/duo-labs/py_webauthn) library for passwordless account registration and authentication.
+This is a basic prototype implementation of CASPER using the  using the [py_webauthn](https://github.com/duo-labs/py_webauthn) library.
 
 ## Requirements
 
@@ -11,7 +9,7 @@ A basic implementation of a WebAuthn RP using the [py_webauthn](https://github.c
 First, set up a virtual environment:
 
 ```sh
-python3 -m venv venv && source venv/bin/activate
+python3 -m venv casper_env && source venv/bin/activate
 ```
 
 Next, install dependencies:
