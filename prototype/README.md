@@ -1,27 +1,21 @@
-## CASPER Prototype Implementation
+# CASPER 
 
-This is a basic prototype implementation of CASPER using the  using the [py_webauthn](https://github.com/duo-labs/py_webauthn) library.
+This is a  prototype implementation of CASPER. The virtual authenticator and client are implemented  in GO based on the [virtualwebauthn](https://github.com/descope/virtualwebauthn) library. The relying party is simulated using a Django server over the [py_webauthn](https://github.com/duo-labs/py_webauthn)  library. 
+    
+# Requirements
+- GO v1.23.1
+- Python 3.8
 
-## Requirements
-
-- Python 3.9+
-
-## Starting the demo
-
-First, set up a virtual environment:
-
-```sh
-python3 -m venv casper_env && source venv/bin/activate
+# How to run 
+To test the one time passkey backup and restoration protocol (BnR) run 
+``` go 
+go test -v -run TestCasper
 ```
+// More to add..
+// use docker for this 
 
-Next, install dependencies:
-
-```sh
-pip install -r requirements.txt
-```
-
-Finally, run the server to view the demo at http://localhost:5000:
-
-```sh
-./start-server.sh
-```
+[] Add the active decoy verifier
+[] separate the client and the RP code and put them over the network
+[] Run the model checking experiments
+[] Docker the whole thing
+[] publish the code

@@ -1,7 +1,0 @@
-0. Assume \Pi^n is saved to the user. 
-1. Deploy this on s3 instance and check working properly via command line. Next we could probabbly run a website the web app would inject CASPER, and call API.  https://github.com/islamazhar/CASPER-web-extension
-2. Try to locate the private keys. 
-3. Generate k other private keys. 
-4. Send all k+1 keys to RP.
-5. RP saves them
-6. Finally for each login request mark the corresponding vk with 1 and other  probabilities. 
