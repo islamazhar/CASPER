@@ -16,4 +16,5 @@ a new detection framework, we call CASPER, which enables websites to detect unau
 ## Todo
 
 - [ ] Separate the code base for RP and client
+- [ ] Use a docker image
 
