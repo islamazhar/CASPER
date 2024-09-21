@@ -6,7 +6,7 @@ where they are stored.
 This repository contains a proof-of-concept implementation and detection 
 effectiveness analysis scripts 
 of a 
-a new detection framework, we call CASPER, which enables websites to detect unauthorized login attempts by making passkeys stolen from PMS identifiable. 
+a new detection framework, we call CASPER, which enables websites to detect unauthorized login attempts by making passkeys stolen by attackers identifiable. 
 
 
 ## How to run
