@@ -1,5 +1,5 @@
 # CASPER 
-This repository  contains 1) prototype implementation of CASPER in GO, and 2) scripts of our detection effectiveness run using PRSIM model checking tool. 
+This repository  contains 1) prototype implementation of CASPER in GO, and 2) scripts of the detection effectiveness of CASPER run using PRSIM model checking tool. 
 
 ## Background
 Synced passkeys are a user-friendly solution for account recovery where passkey management services (PMS) from Apple, Google, Microsoft back up users’ FIDO2 private sign- ing keys to their cloud storage. This solution, however, ex- poses passkeys to the potential risk of PMS cloud storage compromise. Unfortunately, existing designs are unable to eliminate such a risk without reintroducing account recovery issues, leaving resulting abuse of leaked passkey difficult to detect. 
