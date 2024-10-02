@@ -1,6 +1,6 @@
 # CASPER 
 CASPER, is a framework that enables websites to detect unauthorized login attempts using stolen passkeys. 
-CASPER is short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>.
+The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>.
 This repository  contains 1) prototype implementation of CASPER in GO, and 2) scripts of the detection effectiveness of CASPER run using PRSIM model checking tool. 
 
 ## Background
