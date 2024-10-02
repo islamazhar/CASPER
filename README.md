@@ -1,7 +1,7 @@
 # CASPER 
 CASPER, is a framework that enables websites to detect unauthorized login attempts using stolen passkeys. 
 The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>.
-This repository  contains 1) prototype implementation of CASPER in GO, and 2) scripts of the detection effectiveness of CASPER run using PRSIM model checking tool. 
+This repository  contains 1) prototype implementation of CASPER in GO, and 2) scripts of the detection effectiveness of CASPER run using [PRSIM](https://www.prismmodelchecker.org/) model checking tool. 
 
 ## Background
 Synced passkeys are a user-friendly solution for account recovery where passkey management services (PMS) from Apple, Google, Microsoft back up users’ FIDO2 private signing keys to their cloud storage. This solution, however, exposes passkeys to the potential risk of PMS cloud storage compromise. Unfortunately, existing designs are unable to eliminate such a risk without reintroducing account recovery issues, leaving resulting abuse of leaked passkey difficult to detect. Therefore we propose a new detection framework, CASPER, which enables websites to detect unauthorized login attempts by making passkeys stolen from PMS identifiable.
