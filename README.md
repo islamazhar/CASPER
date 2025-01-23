@@ -24,12 +24,20 @@ cd  prototype
 go test -v -run TestCasper
 ```
 
+To run the detection effectivenss  type the following commands  
+``` go
+cd  detection-effectiveness
+prism <name of the script> <corresponding props file>
+```
+
 ## Acknowledgments
 The virtual authenticator and client are implemented over the [virtualwebauthn](https://github.com/descope/virtualwebauthn) library. The relying party is simulated over the [webauthn server](https://github.com/fxamacker/webauthn) library.
 
-# TODO
-- [ ] Add the active decoy verifier
+<!-- ## TODO
+- [x] Add the active decoy verifier
+- [ ] separate the BnR and CD protocols
 - [ ] separate the client and the RP code and put them over the network
 - [ ] Run the model checking experiments
 - [ ] Docker the whole thing
 - [ ] publish the code
+- [ ] just saved the indexes of the activeCreds, and use index everywhere. Do not shuffle W. Even in detection use the indexs -->

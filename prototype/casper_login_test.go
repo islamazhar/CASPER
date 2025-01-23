@@ -12,19 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const (
-	WebauthnDisplayName = "Example"
-	WebauthnDomain      = "example.com"
-	WebauthnOrigin      = "https://example.com"
-	UserID              = "a987z"
-	UserName            = "jappleseed"
-	UserDisplayName     = "John Appleseed"
-	kappa               = 32  /* 128 bits of security */
-	k                   = 32  /* number of decoys */
-	alpha               = 0.6 /* percentage of verifiers being marked */
-)
-
-func TestCasper(t *testing.T) {
+func TestCasperLogin(t *testing.T) {
 
 	// step 0. get \eta from the user
 	// fmt.Print("Enter eta: ")
@@ -35,8 +23,11 @@ func TestCasper(t *testing.T) {
 	// 1. Create W  = {w_1, w_2, \cdot, w_k} // just random strings GenDetectSecret
 
 	W := GenDetectSecret(k, kappa)
-	// fmt.Println(len(W))
+	fmt.Println(len(W))
 	i_star := SelectRealSecret(W, k, eta)
+
+	fmt.Println(len(W))
+
 	// fmt.Printf("i_star => %d\n", i_star)
 
 	// cred := NewCredential(KeyTypeEC2)
@@ -60,18 +51,29 @@ func TestCasper(t *testing.T) {
 	// fmt.Println(privateKey.D)
 
 	// publicKey := privateKey.PublicKey
-	privateKeyMasked, randomSeed := EncCred(W[i_star], privateKey, kappa)
-	D := DecCred(W[i_star], privateKeyMasked, kappa, randomSeed)
-	// fmt.Println(D)
+	privateKeyMasked, z := EncCred(W[i_star], privateKey, kappa)
+
+	/* write randomSeed and W to a file */
+	WritePmsStorage(W, z, privateKeyMasked, cred.ID)
+
+	// [fixme:] the following line is causing the code to crash.
+	// W, z, privateKeyMasked, cred.ID = ReadPmsStorage(k)
+
+	// todo: it should generate k number of Ds?
+	D := DecCred(W[i_star], privateKeyMasked, kappa, z)
+	fmt.Println("D = ", D)
 
 	recoveredPrivateKey := VerifierGen(D)
 
 	require.Equal(t, recoveredPrivateKey, privateKey)
 
-	creds := GenVerifierSet(W, privateKeyMasked, randomSeed, kappa) // instead of verifierSet return a credential set
+	creds := GenVerifierSet(W, privateKeyMasked,
+		z, kappa,
+		i_star, cred.ID) // instead of verifierSet return a credential set
 
+	fmt.Println(creds[i_star])
 	// removing i_star for sampling active verifiers
-	creds = append(creds[:i_star], creds[i_star+1:]...)
+	// creds = append(creds[:i_star], creds[i_star+1:]...)
 
 	// fmt.Printf("size of the creds set %d\n", len(creds))
 
@@ -79,12 +81,18 @@ func TestCasper(t *testing.T) {
 	// require.Contains(t, verifierPubKey, privateKey.PublicKey)
 
 	// Send veriferPubKeys with their markings
-	activeCreds := RandSampleK(creds, alpha)
+	activeDecoyCreds := RandSampleK(creds, alpha, i_star)
+	/* writing the active IDs */
+	// fmt.Println(activeCreds)
+	WriteRpStorage(activeDecoyCreds)
+	activeDecoyCreds, _ = ReadRpStorage()
+
+	// fmt.Println(activeCreds)
 	// fmt.Println("Len of active creds ", len(activeCreds))
 
 	// adding the real passkey
-	creds = append(creds, cred)
-	creds = RandSampleK(creds, 1.0) // randomly shuffling the creds
+	// creds = append(creds, cred)
+	// creds = RandSampleK(creds, 1.0) // randomly shuffling the creds
 
 	// fmt.Println("Len of creds ", len(creds))
 
@@ -139,7 +147,7 @@ func TestCasper(t *testing.T) {
 		webauthnEC2Credentials = append(webauthnEC2Credentials, webauthnEC2Credential)
 	}
 
-	// fmt.Printf("Done with registration\n")
+	fmt.Printf("==========\tDone with registration\t==========\n")
 
 	// Add the userID to the mock authenticator so it can return it in assertion responses.
 	authenticator.Options.UserHandle = []byte(UserID)
@@ -149,7 +157,7 @@ func TestCasper(t *testing.T) {
 		authenticator.AddCredential(creds[i])
 	}
 
-	// LOGIN
+	// FIGURE 5: Compromise detection algorithm
 
 	//// step 1: cred.ID is sent to by the client to the RP
 
@@ -184,13 +192,22 @@ func TestCasper(t *testing.T) {
 	for i := 0; i < len(assertionResponses); i++ {
 		err := finishWebauthnLogin(t, assertions[i], assertionResponses[i])
 		if err == nil {
-			if IsActiveCred(activeCreds, assertions[i].CredentialID) {
+			fmt.Println(i)
+			if IsActiveDecoyCred(activeDecoyCreds, i) {
+				fmt.Println(activeDecoyCreds)
+				fmt.Println(i)
 				result = 1
 				break
 			} else {
+				// the passkey is not part of the active decoy. Login successful
+				fmt.Println(i)
 				result = 2
 			}
 		}
+		// else {
+		// 	unsuccessful login
+		// }
+
 		// fmt.Println(err)
 	}
 
