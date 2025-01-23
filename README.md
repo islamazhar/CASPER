@@ -1,32 +1,15 @@
 # CASPER 
-CASPER, is a framework that enables websites to detect unauthorized login attempts using stolen passkeys. 
-The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>.
-This repository contains 1) the code of the prototype implementation we used for the   performance analysis of CASPER. 2) the model checking scripts (in <a href="https://www.prismmodelchecker.org/">PRSIM</a> model checking language) to evaluate the detection effectiveness of CASPER.
 
- The paper is to appear at USENIX Security 2025. For details please refer to our paper.
+CASPER, is a framework that enables websites to detect unauthorized login attempts using stolen passkeys.  The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>. This repository contains 1) the code of the prototype implementation we used for the   performance analysis of CASPER. 2) the model checking scripts (in <a href="https://www.prismmodelchecker.org/">PRSIM</a> model checking language) to evaluate the detection effectiveness of CASPER.
+
+
+The paper is to appear at USENIX Security 2025. For details please refer to our paper.
 
 ## Background
-FIDO synced passkeys address account recovery challenges
-by enabling users to back up their FIDO2 private signing
-keys to the cloud storage of passkey management services
-(PMS). However, it introduces an additional risk — attackers
-can steal users’ passkeys through breaches of PMS’s cloud
-storage. Unfortunately, existing defenses cannot eliminate
-this risk without reintroducing account recovery challenges
-or disrupting users daily account login routines. 
-parties
+FIDO synced passkeys address account recovery challenges by enabling users to back up their FIDO2 private signing keys to the cloud storage of passkey management services (PMS). However, it introduces an additional risk — attackers can steal users’ passkeys through breaches of PMS’s cloud storage. Unfortunately, existing defenses cannot eliminate this risk without reintroducing account recovery challenges or disrupting users daily account login routines. 
 
 ## Results
-We present CASPER, the first passkey breach detection frame-
-work that enables web service providers to detect the abuse of
-passkeys leaked from PMS for unauthorized login attempts.
-Our analysis shows that CASPER provides compelling detection effectiveness, even against knowledgeable attackers
-who strategically optimize their attacks to evade CASPER’s
-detection. We also show how CASPER can be seamlessly
-integrated into the existing passkey backup, synchronization,
-and authentication processes, with only minimal impact on
-user experience, negligible performance overhead, and minimum deployment and storage complexity for the participating
-parties.
+We present CASPER, the first passkey breach detection framework that enables web service providers to detect the abuse of passkeys leaked from PMS for unauthorized login attempts.Our analysis shows that CASPER provides compelling detection effectiveness, even against knowledgeable attackers who strategically optimize their attacks to evade CASPER’s detection. We also show how CASPER can be seamlessly integrated into the existing passkey backup, synchronization, and authentication processes, with only minimal impact on user experience, negligible performance overhead, and minimum deployment and storage complexity for the participating parties.
     
 ## Requirements
 - GO v1.23.1
