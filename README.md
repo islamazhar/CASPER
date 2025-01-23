@@ -62,6 +62,9 @@ prism passkey_tdp.prism passkey_tdp.props
 Similarly for `eff` (Figure 8) with $\sigma=1$ and $\sigma=2$ use the `passkey_eff_std1.prism` and `passkey_eff_std2.prism` respectively. 
 
 ## Notes
+
+- This repository is a proof-of-concept prototype. Please review it carefully before using it for any purposes.
+
 - The current prototype does not run the RP and PMS on dedicated nodes to measure the network latency. In the next version we will provide the necessary scripts to do this. 
 - We will also provide a docker image to run the experiments smoothly.  
 
