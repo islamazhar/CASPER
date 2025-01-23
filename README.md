@@ -74,7 +74,7 @@ Similarly for `eff` (Figure 8) with $\sigma=1$ and $\sigma=2$ use the `passkey_e
 The virtual authenticator and client are implemented over the [virtualwebauthn](https://github.com/descope/virtualwebauthn) library. The relying party is simulated over the [webauthn server](https://github.com/fxamacker/webauthn) library.
 
 ## Contact
-We are always looking for ways to improve our codes. For any bugs please email at: mislam9@wisc.edu
+We are always looking for ways to improve our code. For any bugs please email at: mislam9@wisc.edu
 
 
 ## Citations
