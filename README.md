@@ -23,8 +23,7 @@ who strategically optimize their attacks to evade CASPER’s
 detection. We also show how CASPER can be seamlessly
 integrated into the existing passkey backup, synchronization,
 and authentication processes, with only minimal impact on
-user experience, negligible performance overhead, and mini-
-mum deployment and storage complexity for the participating
+user experience, negligible performance overhead, and minimum deployment and storage complexity for the participating
 parties.
     
 ## Requirements
