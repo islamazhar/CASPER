@@ -3,6 +3,10 @@ CASPER, is a framework that enables websites to detect unauthorized login attemp
 The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>.
 This repository  contains 1) prototype implementation of CASPER in Go language, and 2) scripts of the detection effectiveness of CASPER run using [PRSIM](https://www.prismmodelchecker.org/) model checking tool. 
 
+This repository contains the code of the prototype implementation we used for the   performance analysis of CASPER. Additionally, it contains the model checking scripts (in <a href="https://www.prismmodelchecker.org/">PRSIM</a> model checking language) to evaluate the detection effectiveness of CASPER.
+
+ The paper is to appear at USENIX Security 2025. For details please refer to our paper.
+
 ## Background
 FIDO synced passkeys address account recovery challenges
 by enabling users to back up their FIDO2 private signing
@@ -71,16 +75,19 @@ Similarly for `eff` (Figure 8) with $\sigma=1$ and $\sigma=2$ use the `passkey_e
 ## Acknowledgments
 The virtual authenticator and client are implemented over the [virtualwebauthn](https://github.com/descope/virtualwebauthn) library. The relying party is simulated over the [webauthn server](https://github.com/fxamacker/webauthn) library.
 
+## Contact
+We are always looking for ways to improve our codes. For any bugs please email at: mislam9@wisc.edu
 
 
-<!-- ## TODO
-- [x] Add the active decoy verifier
-- [ ] separate the BnR and CD protocols
-- [ ] separate the client and the RP code and put them over the network
-- [ ] Run the model checking experiments
-- [ ] Docker the whole thing
-- [ ] publish the code
-- [ ] just saved the indexes of the activeCreds, and use index everywhere. Do not shuffle W. Even in detection use the indexs -->
+## Citations
 
-<!-- Figure 6 passkey_tdp.prism passkey_tdp.propos-->
-<!--- >  
+if you use any part of our code or paper please cite our paper.
+
+```
+@inproceedings{casper,
+  title={{Detecting Compromise of Passkey Storage on the Clou}},
+  author={Mazharul Islam, Sunpreet S. Arora, Rahul Chatterjee, Ke Coby Wang†},
+  booktitle={34th {USENIX} Security Symposium ({USENIX} Security 25) (To appear)},
+  year={2025},
+  organization={USENIX}
+}
