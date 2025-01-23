@@ -1,6 +1,0 @@
-1. Not sure why the detection_text code is not working :-(
-
-install 
-https://www.prismmodelchecker.org/download.php
-go install? 
-
