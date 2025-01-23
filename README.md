@@ -42,7 +42,7 @@ For example to run minimum expected true detection probabilities (TDP) as a func
 cd  detection-effectiveness
 prism passkey_tdp.prism passkey_tdp.props
 ```
-Similarly for `eff` (Figure 8) with $\sigma=1$ and $\sigma=2$ use the `passkey_eff_std1.prism` and `passkey_eff_std1.prism` respectively. 
+Similarly for `eff` (Figure 8) with $\sigma=1$ and $\sigma=2$ use the `passkey_eff_std1.prism` and `passkey_eff_std2.prism` respectively. 
 
 ## Acknowledgments
 The virtual authenticator and client are implemented over the [virtualwebauthn](https://github.com/descope/virtualwebauthn) library. The relying party is simulated over the [webauthn server](https://github.com/fxamacker/webauthn) library.
