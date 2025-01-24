@@ -32,19 +32,26 @@ Similarly to test CASPER's detection capability use the  command `go test -v -ru
 
 ### Detection effectiveness
 
-To run the detection effectiveness experiments type the following commands  
+To run the detection effectiveness experiments, please first download and install PRISM 4.8 according the instructions provided [here](https://www.prismmodelchecker.org/manual/InstallingPRISM/Instructions), and then execute the following commands  
 
 ``` bash
 cd  detection-effectiveness
-prism <name of the model file .prism> <corresponding property specification file .props>
+prism <name of the model file .prism> <corresponding property specification file .props> -const <parameters>
 ```
-For example to run the minimum expected true detection probabilities (TDP) as a function of $\alpha$ with varying $m$ and $n$ (Figure 6 in the paper) run 
+For example to run the minimum expected true detection probabilities (TDP) as a function of $\alpha$ with varying $m$, $n$, given a fixed $k$ (shown in Figure 6 in the paper), run 
 
 ``` bash
 cd  detection-effectiveness
-prism passkey_tdp.prism passkey_tdp.props
+prism passkey_tdp.prism passkey_tdp.props -const unmarked_fraction=0:0.1:1,snapshots=1,sites=1:2:9,K=32
 ```
-Similarly for the `eff` experiments (Figure 8 in the paper) with $\sigma=1$ and $\sigma=2$ use the `passkey_eff_std1.prism` and `passkey_eff_std2.prism` model files respectively. 
+Here, the variables `unmarked_fraction`, `sites`, `snapshots`, and `K` in the code represents $\alpha$, $m$, $n$, and $k$, respectively. `unmarked_fraction=0:0.1:1` means the values of $0$, $0.1$, ..., $0.9$, $0.1$ are used from `unmarked_fraction`. This command produces the results shown in Figure 6(b) in the paper, where $n$ = `snapshots` = 1. 
+
+Similarly for the `eff` experiments (Figure 8 in the paper) with $\sigma=1$ and $\sigma=2$ use the `passkey_eff_std1.prism` and `passkey_eff_std2.prism` model files respectively. As an example, the following command produces the results shown in Figure 8(a) in the paper:
+
+``` bash
+cd  detection-effectiveness
+prism passkey_eff_std2.prism passkey_eff.props -const unmarked_fraction=0:0.1:1,lambda=0.5,sites=1:2:9,K=32
+```
 
 ## Notes
 
@@ -68,7 +75,8 @@ if you use any part of our code or paper please cite our paper.
 @inproceedings{casper,
   title={{Detecting Compromise of Passkey Storage on the Cloud}},
   author={Mazharul Islam, Sunpreet S. Arora, Rahul Chatterjee, Ke Coby Wang},
-  booktitle={34th {USENIX} Security Symposium ({USENIX} Security 25) (To appear)},
-  year={2025},
-  organization={USENIX}
+  booktitle={34\textsuperscript{th} {USENIX} Security Symposium},
+  publisher = {{USENIX} Association},
+  month = {Aug},
+  year={2025}
 }
