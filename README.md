@@ -12,7 +12,7 @@ FIDO synced passkeys address account recovery challenges by enabling users to ba
 We present CASPER, the first passkey breach detection framework that enables web service providers to detect the abuse of passkeys leaked from PMS for unauthorized login attempts. Our analysis shows that CASPER provides compelling detection effectiveness, even against knowledgeable attackers who strategically optimize their attacks to evade CASPER’s detection. We also show how CASPER can be seamlessly integrated into the existing passkey backup, synchronization, and authentication processes, with only minimal impact on user experience, negligible performance overhead, and minimum deployment and storage complexity for the participating parties.
     
 ## Requirements
-- GO v1.23.1
+- Go v1.23.1
 - Python 3.8
 
 
@@ -32,19 +32,19 @@ Similarly to test CASPER's detection capability use the  command `go test -v -ru
 
 ### Detection effectiveness
 
-To run the detection effectiveness  type the following commands  
+To run the detection effectiveness experiments type the following commands  
 
 ``` bash
 cd  detection-effectiveness
 prism <name of the model file .prism> <corresponding property specification file .props>
 ```
-For example to run minimum expected true detection probabilities (TDP) as a function of $\alpha$ with varying $m$ and $n$ (Figure 6 in the paper) run 
+For example to run the minimum expected true detection probabilities (TDP) as a function of $\alpha$ with varying $m$ and $n$ (Figure 6 in the paper) run 
 
 ``` bash
 cd  detection-effectiveness
 prism passkey_tdp.prism passkey_tdp.props
 ```
-Similarly for `eff` (Figure 8) with $\sigma=1$ and $\sigma=2$ use the `passkey_eff_std1.prism` and `passkey_eff_std2.prism` respectively. 
+Similarly for the `eff` experiments (Figure 8 in the paper) with $\sigma=1$ and $\sigma=2$ use the `passkey_eff_std1.prism` and `passkey_eff_std2.prism` model files respectively. 
 
 ## Notes
 
