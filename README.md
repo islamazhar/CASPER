@@ -3,7 +3,7 @@
 CASPER, is a framework that enables websites to detect unauthorized login attempts using stolen passkeys.  The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>. This repository contains 1) the code of the prototype implementation we used for the   performance analysis of CASPER. 2) the model checking scripts (in <a href="https://www.prismmodelchecker.org/">PRSIM</a> model checking language) to evaluate the detection effectiveness of CASPER.
 
 
-The paper is to appear at USENIX Security 2025. For details please refer to our paper.
+The paper is to appear at USENIX Security 2025. For details please refer to [our paper](https://pages.cs.wisc.edu/~mazharul/files/casperUsenix25Islam.pdf).
 
 ## Background
 FIDO synced passkeys address account recovery challenges by enabling users to back up their FIDO2 private signing keys to the cloud storage of passkey management services (PMS). However, it introduces an additional risk — attackers can steal users’ passkeys through breaches of PMS’s cloud storage. Unfortunately, existing defenses cannot eliminate this risk without reintroducing account recovery challenges or disrupting users daily account login routines. 
@@ -67,7 +67,7 @@ if you use any part of our code or paper please cite our paper.
 ```
 @inproceedings{casper,
   title={{Detecting Compromise of Passkey Storage on the Cloud}},
-  author={Mazharul Islam, Sunpreet S. Arora, Rahul Chatterjee, Ke Coby Wang†},
+  author={Mazharul Islam, Sunpreet S. Arora, Rahul Chatterjee, Ke Coby Wang},
   booktitle={34th {USENIX} Security Symposium ({USENIX} Security 25) (To appear)},
   year={2025},
   organization={USENIX}
