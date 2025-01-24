@@ -32,7 +32,7 @@ Similarly to test CASPER's detection capability use the  command `go test -v -ru
 
 ### Detection effectiveness
 
-To run the detection effectiveness experiments, please first download and install PRISM 4.8 according the instructions provided [here](https://www.prismmodelchecker.org/manual/InstallingPRISM/Instructions), and then execute the following commands  
+To run the detection effectiveness experiments, please first download and install PRISM 4.8 according to the instructions provided [here](https://www.prismmodelchecker.org/manual/InstallingPRISM/Instructions), and then execute the following commands  
 
 ``` bash
 cd  detection-effectiveness
