@@ -51,7 +51,7 @@ Similarly for the `eff` experiments (Figure 8 in the paper) with $\sigma=1$ and 
 - This repository is a proof-of-concept prototype. Please review it carefully before using it for any purposes.
 
 - The current prototype does not run the RP and PMS on dedicated nodes to measure the network latency. In the next version we will provide the necessary scripts to do this. 
-- We will also provide a docker image to run the experiments smoothly.  
+- We will also provide a docker image for reproducibility purposes.
 
 ## Acknowledgments
 The virtual authenticator and client are implemented over the [virtualwebauthn](https://github.com/descope/virtualwebauthn) library. The relying party is simulated over the [webauthn server](https://github.com/fxamacker/webauthn) library.
