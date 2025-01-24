@@ -66,7 +66,7 @@ if you use any part of our code or paper please cite our paper.
 
 ```
 @inproceedings{casper,
-  title={{Detecting Compromise of Passkey Storage on the Clou}},
+  title={{Detecting Compromise of Passkey Storage on the Cloud}},
   author={Mazharul Islam, Sunpreet S. Arora, Rahul Chatterjee, Ke Coby Wang†},
   booktitle={34th {USENIX} Security Symposium ({USENIX} Security 25) (To appear)},
   year={2025},
