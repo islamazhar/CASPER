@@ -1,6 +1,6 @@
 # CASPER 
 
-CASPER, is a framework that enables websites to detect unauthorized login attempts using stolen passkeys.  The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>. This repository contains 1) the code of the prototype implementation we used for the   performance analysis of CASPER. 2) the model checking scripts (in <a href="https://www.prismmodelchecker.org/">PRSIM</a> model checking language) to evaluate the detection effectiveness of CASPER.
+CASPER, is a framework that enables websites to detect unauthorized login attempts using stolen passkeys.  The name is a short for <ins>C</ins>apturing p<ins>AS</ins>skey com<ins>P</ins>romise by attack<ins>ER</ins>. This repository contains 1) the code of the prototype implementation we used for the   performance analysis of CASPER. 2) the model checking scripts (in <a href="https://www.prismmodelchecker.org/">PRISM</a> model checking language) to evaluate the detection effectiveness of CASPER.
 
 
 The paper is to appear at USENIX Security 2025. For details please refer to [our paper](https://pages.cs.wisc.edu/~mazharul/files/casperUsenix25Islam.pdf).
@@ -19,7 +19,7 @@ We present CASPER, the first passkey breach detection framework that enables web
 ## How to run?
 ### Prototype implementation
 - The folder `prototype` contains the the proof-of-concept implementation of CASPER in Go.
-- The folder `detection-effectiveness` contains the scripts of our detection effectiveness run using PRSIM model checking tool. 
+- The folder `detection-effectiveness` contains the scripts of our detection effectiveness run using PRISM model checking tool. 
 
 To run the prototype implementation type the following commands  
 ``` bash
