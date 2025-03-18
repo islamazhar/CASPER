@@ -73,8 +73,8 @@ if you use any part of our code or paper please cite our paper.
 
 ```latex
 @inproceedings{casper,
-  title={{Detecting Compromise of Passkey Storage on the Cloud}},
-  author={Mazharul Islam, Sunpreet S. Arora, Rahul Chatterjee, Ke Coby Wang},
+  title={{Detecting compromise of passkey storage on the cloud}},
+  author={Islam, Mazharul and Arora, Sunpreet S. and Chatterjee, Rahul and Wang, Ke Coby},
   booktitle={34\textsuperscript{th} {USENIX} Security Symposium},
   publisher = {{USENIX} Association},
   month = {Aug},
